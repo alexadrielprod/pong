@@ -41,6 +41,10 @@ document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousemove", mouseMoveHandler, false);
 
+document.addEventListener('touchstart', touchHandler, false);
+document.addEventListener('touchmove', touchMoveHandler, false);
+document.addEventListener('touchend', touchHandler, false);
+
 function mouseMoveHandler(i) {
     var relativex = i.clientX - canvas.offsetLeft;
     if (relativex > 0 && relativex < canvas.width) {
@@ -63,6 +67,28 @@ function keyUpHandler(i) {
     else if (i.key == "ArrowLeft" || i.key == "Left") {
         leftPressed = false;
     }
+}
+
+function touchHandler(e) {
+
+    const relativeX = e.changedTouches[0].pageX - canvas.offsetLeft;  
+
+    // Check that cursor is on the canvas
+    if(relativeX > 0 && relativeX < canvas.width) {
+        paddlex = relativeX - paddleWidth / 2; 
+    } 
+
+}
+
+function touchMoveHandler(e) {
+
+    const relativeX = e.targetTouches[0].pageX - canvas.offsetLeft;  
+
+    // Check that cursor is on the canvas
+    if(relativeX > 0 && relativeX < canvas.width) {
+        paddlex = relativeX - paddleWidth / 2; 
+    }
+
 }
 
 function collisionDetection() {
